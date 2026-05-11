@@ -74,14 +74,14 @@ try:
 except TypeError as e:
     print(f"Error: {e}\nError: Tuples are immutable, you cannot change them.")
 
+# For each student, removes current last grade. Prints first and last grade and prints that amount of grades.
 try:
     for student in student_dict:
         student_dict[student].grades.pop()
         print(f"{student_dict[student].name}'s first and last grade: ({student_dict[student].grades[0]}, {student_dict[student].grades[-1]})")
         print(f"{student_dict[student].name} has {len(student_dict[student].grades)} grades.")
 
-except ValueError as ve:
-    print(f"ValueError: {ve}")
+# If the grades list is empty it will raise a Index error. So we catch it here.
+except IndexError as ie:
+    print(f"IndexError: {ie}\nError: grades list is empty. Nothing to .pop()")
 
-except TypeError as te:
-    print(f"TypeError: {te}")
