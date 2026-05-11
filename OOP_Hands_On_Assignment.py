@@ -72,4 +72,16 @@ print(f"All unique grades from each student: {get_all_unique_grades(student_dict
 try:
     student1.grades_tuple[0] = 101
 except TypeError as e:
-    print(f"{e} Error: Tuples are immutable, you cannot change them.")
+    print(f"Error: {e}\nError: Tuples are immutable, you cannot change them.")
+
+try:
+    for student in student_dict:
+        student_dict[student].grades.pop()
+        print(f"{student_dict[student].name}'s first and last grade: ({student_dict[student].grades[0]}, {student_dict[student].grades[-1]})")
+        print(f"{student_dict[student].name} has {len(student_dict[student].grades)} grades.")
+
+except ValueError as ve:
+    print(f"ValueError: {ve}")
+
+except TypeError as te:
+    print(f"TypeError: {te}")
