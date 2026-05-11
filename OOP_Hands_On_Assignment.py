@@ -1,11 +1,26 @@
 import random
+import re
 
 class Student:
     def __init__(self, name:str, email:str, grades:list=[]):
         self.name = name
-        self.email = email
+
+        if self.validate_email(email):
+            self.email = email
+        else:
+            raise ValueError(f"Invalid email address: {email}\nMust be in format name@domain.com")
+
         self.grades = grades
 
+    # Validates if the email is in the correct format.
+    def validate_email(self, email: str) -> bool:
+        pattern = r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+
+        if re.match(pattern, email):
+            return True
+        else:
+            return False
+        
     # Use to add a grade to the grades list. Grades list is empty by default
     def add_grade(self, grade:int):
         self.grades.append(int(grade))
@@ -32,6 +47,17 @@ def get_student_by_email(email:str):
 # Runs 2 inline for loops to get a set of all the grades from every student.
 def get_all_unique_grades(students:dict):
     return {grade for student in students.values() for grade in student.grades}
+
+# Counts how many grades are above 90 across all students.
+def get_all_90_above(students:dict) -> int:
+    count = 0
+
+    for student in student_dict:
+        for grade in student_dict[student].grades:
+            if grade >= 90:
+                count += 1
+
+    return count
 
 # Each student is given random starting grades.
 student1 = Student("George", "Gman112@gmail.com", [random.randint(0, 100), random.randint(0, 100), random.randint(0, 100)])
@@ -85,3 +111,4 @@ try:
 except IndexError as ie:
     print(f"IndexError: {ie}\nError: grades list is empty. Nothing to .pop()")
 
+print(f"There are {get_all_90_above(student_dict)} grades 90 and above.")
