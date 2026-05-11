@@ -20,6 +20,10 @@ class Student:
     # Displays formatted information about a student. 
     def display_info(self) -> str:
         return f"Student name: {self.name}, Student Email: {self.email}, Student's grades: {self.grades}"
+    
+    # Returns the student's grades as a tuple.
+    def grades_tuple(self) -> tuple:
+        return tuple(self.grades)
 
 # Function that uses the student_dict to retrieve a student's object via their email.
 def get_student_by_email(email:str):
@@ -51,14 +55,21 @@ student3.add_grade(random.randint(0, 100))
 student3.add_grade(random.randint(0, 100))
 
 
-# print(student1.display_info())
-# print(student1.average_grade())
-# print(get_student_by_email("Gman112@gmail.com"))
 
-# print(student2.display_info())
-# print(student2.average_grade())
+print(f"Student's information: {student1.display_info()}")
+print(f"Student's average grade: {student1.average_grade()}")
+print(f'Student object obtained via email: {get_student_by_email("Gman112@gmail.com")}\n')
 
-# print(student3.display_info())
-# print(student3.average_grade())
+print(f"Student's information: {student2.display_info()}")
+print(f"Student's average grade: {student2.average_grade()}\n")
 
-print(f"All unique grades from each student: {get_all_unique_grades(student_dict)}")
+print(f"Student's information: {student3.display_info()}")
+print(f"Student's average grade: {student3.average_grade()}\n")
+
+print(f"All unique grades from each student: {get_all_unique_grades(student_dict)}\n")
+
+# Demonstrating that tuples are immutable and cannot be changed.
+try:
+    student1.grades_tuple[0] = 101
+except TypeError as e:
+    print(f"{e} Error: Tuples are immutable, you cannot change them.")
